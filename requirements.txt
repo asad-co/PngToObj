@@ -6,3 +6,4 @@ transformers==4.46.2
 diffusers==0.31.0
 opencv-python==4.10.0.84
 scipy==1.10.1
+plyfile==1.0.3

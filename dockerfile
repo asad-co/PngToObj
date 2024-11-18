@@ -20,12 +20,11 @@ WORKDIR /app
 COPY . /app
 
 RUN pip install torch==2.5.0+cu118 torchvision==0.20.0+cu118 torchaudio==2.5.0+cu118 --index-url https://download.pytorch.org/whl/cu118
+RUN pip install /app/diff-gaussian-rasterization/
+RUN pip install -U xformers --index-url https://download.pytorch.org/whl/cu118
 
 
 ENV CUDA_HOME=/usr/local/cuda
 
 RUN git clone https://github.com/graphdeco-inria/diff-gaussian-rasterization.git
-
-RUN pip install /app/diff-gaussian-rasterization/
-
-CMD ["python", "app.py"]
+RUN pip install /app/diff-gaussian-rasterization
