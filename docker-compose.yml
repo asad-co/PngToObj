@@ -4,4 +4,13 @@ services:
     build: .
     volumes:
       - .:/app
+      - /app/diff-gaussian-rasterization
+      
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
     command: tail -f /dev/null
