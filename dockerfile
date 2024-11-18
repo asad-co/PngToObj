@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu20.04
+FROM nvidia/cuda:11.8-cudnn8-devel-ubuntu20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -18,13 +18,14 @@ RUN python3 -m pip install --upgrade pip && \
 
 WORKDIR /app
 COPY . /app
-RUN pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 --index-url https://download.pytorch.org/whl/cu118
+
+RUN pip install torch==2.5.0+cu118 torchvision==0.20.0+cu118 torchaudio==2.5.0+cu118 --index-url https://download.pytorch.org/whl/cu118
 
 
 ENV CUDA_HOME=/usr/local/cuda
 
-RUN git clone https://github.com/graphdeco-inria/diff-gaussian-rasterization.git && \
-    cd diff-gaussian-rasterization && \
-    pip install .
+RUN git clone https://github.com/graphdeco-inria/diff-gaussian-rasterization.git
+
+RUN pip install /app/diff-gaussian-rasterization/
 
 CMD ["python", "app.py"]
