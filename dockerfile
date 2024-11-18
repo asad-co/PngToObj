@@ -8,7 +8,7 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y python3.10 python3.10-venv python3.10-dev python3-pip git ninja-build tzdata wget && \
     rm -rf /var/lib/apt/lists/* && \
-    apt-get install -y libglm-dev
+    apt-get install -y libglm-dev libgl1
 
 RUN ln -fs /usr/share/zoneinfo/Etc/UTC /etc/localtime && \
     dpkg-reconfigure --frontend noninteractive tzdata
