@@ -7,7 +7,8 @@ RUN apt-get update && \
     add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && \
     apt-get install -y python3.10 python3.10-venv python3.10-dev python3-pip git ninja-build tzdata wget && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get install -y libglm-dev
 
 RUN ln -fs /usr/share/zoneinfo/Etc/UTC /etc/localtime && \
     dpkg-reconfigure --frontend noninteractive tzdata
@@ -22,8 +23,8 @@ RUN pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 --index-url https:/
 
 ENV CUDA_HOME=/usr/local/cuda
 
-# RUN git clone https://github.com/graphdeco-inria/diff-gaussian-rasterization.git && \
-#     cd diff-gaussian-rasterization && \
-#     pip install .
+RUN git clone https://github.com/graphdeco-inria/diff-gaussian-rasterization.git && \
+    cd diff-gaussian-rasterization && \
+    pip install .
 
 CMD ["python", "app.py"]
